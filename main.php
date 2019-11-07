@@ -1,6 +1,6 @@
 <?php
-include_once ("lib/chk.php"); 
-include_once ("_conn.php"); 
+require_once ("lib/chk.php"); 
+require_once ("_conn.php"); 
 require_once ("_meta.php");
 ?>
 <script>
@@ -58,7 +58,7 @@ var is_remember = false;
                 <a href="javascript:;">用户：<?php echo $_SESSION['fullname']; ?></a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="./login_out.php">退出</a>
+                        <a onclick="login_out();" href='javascript:;'>退出</a>
                     </dd>
                 </dl>
             </li>
@@ -192,16 +192,6 @@ var is_remember = false;
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>区域管理</cite></a>
                         </li>
-                        <li>
-                            <a onclick="xadmin.add_tab('更新日志','log.php')">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>更新日志</cite></a>
-                        </li>
-                        <li>
-                            <a onclick="xadmin.add_tab('使用说明','manual.php')">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>使用说明</cite></a>
-                        </li>
                     </ul>
                 </li>
 
@@ -238,5 +228,20 @@ var is_remember = false;
     <!-- 中部结束 -->
 
 </body>
-
+<script type="text/javascript">
+	function login_out() {
+		$.ajax({
+			url: "_func.php?act=login_out",
+			success: function(data) {
+					layer.msg('已退出!', {
+						time: 2000,
+						end: function() {
+							location.href='login.php';
+						}
+					})
+			}
+		});
+		return false;
+	}
+</script>
 </html>

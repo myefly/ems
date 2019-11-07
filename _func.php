@@ -7,7 +7,6 @@ switch($_GET['act']){
 		session_start();
 		$name = $_POST['lgname'];
 		$pwd = $_POST['lgpwd'];
-		//$sql = "select user_name,user_fullname,user_auth from hz_user where user_name = '".$name."' and user_pwd = '".md5($pwd)."'";
 		$rs = $db->get("ems_user", "*",["AND" => ["eu_name" => $name,"eu_pwd" => md5($pwd)]]);
 		if ((count($rs)) == 0){
 			echo '0';
@@ -18,7 +17,26 @@ switch($_GET['act']){
 			echo '1';
 	}
 	break;
-		
+
+	case 'login_out':
+		$_SESSION = array();
+		if (isset($_COOKIE[session_name()])) {
+      		setcookie(session_name(), '', time()-42000, '/');
+ 		}
+ 		// 最后彻底销毁session.
+		session_destroy();
+	break;
+
+	case 'del':
+		$del_id = $_POST['d_id'];
+		$del_table = $_POST['d_table'];
+
+		$dels = $db->delete($del_table, [
+			"rl_id" => $del_id,
+		]);
+		echo $dels ->rowCount();
+	break;
+	
 }
 
 ?>
