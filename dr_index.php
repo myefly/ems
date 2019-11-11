@@ -121,6 +121,7 @@ function _del(obj,table,id,idv){
                         }else{
                             layer.msg('删除错误，请查询问题',{icon:1,time:1000});
                         }
+                    }
                 });
                 return false;
             });
