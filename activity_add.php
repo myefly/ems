@@ -110,7 +110,7 @@ if($_GET['act']=='edit'){
                 form.on('submit(add)',
                   function(data) {
                     $.ajax({
-                      url:"sshd_check.php?act=add",
+                      url:"_func.php?act=activity_add",
                       async: false,
                       type:"POST",
                       data:data.field,
@@ -153,7 +153,7 @@ if($_GET['act']=='edit'){
                 form.on('submit(edit)',
                   function(data) {
                     $.ajax({
-                      url:"sshd_check.php?act=edit",
+                      url:"_func.php?act=activity_edit",
                       async: false,
                       type:"POST",
                       data:data.field,
@@ -184,21 +184,15 @@ if($_GET['act']=='edit'){
 <script type="text/javascript">
     $(function() {
         var availableTags = [
-        <?php
-$sdb = new SQLite3($mysqlite);
-$sql = "SELECT * FROM region_list";
-$rd = $sdb->query($sql);
-  while($rr = $rd->fetchArray(SQLITE3_ASSOC) ){
-    echo "'".$rr['r_vc_name']." - ".$rr['r_township']." - ".$rr['r_county']."',";
-
-  }
-
-
-$sdb->close();
-?>
- 
+          <?php
+            $rds = $db->select("region_list", "*");
+            foreach($rds as $rd){
+              echo "'".$rd['rl_vc_name']." - ".$rd['rl_township']." - ".$rd['rl_county']."',";
+            }
+          ?>
         ];
-        $( "#al_address" ).autocomplete({
+
+    $( "#al_address" ).autocomplete({
             source:
                     function(request, response) {
                         var results = $.ui.autocomplete.filter(availableTags, request.term);

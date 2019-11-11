@@ -20,10 +20,10 @@ require_once ("_meta.php");
 					<div class="layui-card">
 						<div class="layui-card-body ">
 							<div>
-								<a class="layui-btn layui-btn-normal layui-btn-mini"  onclick="xadmin.open('社筛活动','sshd_add.php?act=add')">
+								<a class="layui-btn layui-btn-normal layui-btn-mini"  onclick="xadmin.open('社筛活动','activity_add.php?act=add')">
 									添加社筛活动
 								</a>
-								<a style="float: right;" class="layui-btn layui-btn-warm layui-btn-mini"  onclick="xadmin.open('活动日历','sshd_cal.php')">
+								<a style="float: right;" class="layui-btn layui-btn-warm layui-btn-mini"  onclick="xadmin.open('活动日历','activity_cal.php')">
 									查看活动日历
 								</a>
 							</div>

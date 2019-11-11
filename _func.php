@@ -114,6 +114,58 @@ switch($_GET['act']){
 			exit();
 		}
 	break;
+
+	case 'activity_add':
+		$al_date = $_POST['al_date'];
+		$al_time = $_POST['al_time'];
+ 		$al_address = $_POST['al_address'];
+ 		$al_content = $_POST['al_content'];
+ 		$al_note = $_POST['al_note'];
+
+		$alt_id = $db->insert("activities_list", [
+		    "al_date" => $al_date,
+		    "al_time" => $al_time,
+		    "al_address" => $al_address,
+		    "al_content" => $al_content,
+		    "al_note" => $al_note
+		]);
+
+		if($alt_id !== ''){
+			echo "1";
+			exit();
+		}else{
+			echo "0";
+			exit();
+		}
+	break;
+
+	case 'activity_edit':
+		$al_id = $_POST['al_id'];
+		$al_date = $_POST['al_date'];
+		$al_time = $_POST['al_time'];
+ 		$al_address = $_POST['al_address'];
+ 		$al_content = $_POST['al_content'];
+ 		$al_note = $_POST['al_note'];
+
+		$aled_id = $db->update("activities_list", [
+			"al_date" => $al_date,
+		    "al_time" => $al_time,
+		    "al_address" => $al_address,
+		    "al_content" => $al_content,
+		    "al_note" => $al_note
+		], [
+			"al_id" => $al_id
+		]);
+
+
+		if($aled_id !== ''){
+			echo "1";
+			exit();
+		}else{
+			echo "0";
+			exit();
+		}
+	break;
 	
 }
 

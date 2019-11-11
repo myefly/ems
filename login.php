@@ -28,7 +28,7 @@ if(isset($_SESSION['name'])) {
 <body class="login-bg">
     
     <div class="login layui-anim layui-anim-up">
-        <div class="message"><?php echo constant("EMS_NAME");?> - EMS <?php echo constant("EMS_VERSION");?>登录</div>
+        <div class="message"><?php echo constant("EMS_NAME");?> - EMS <?php echo constant("EMS_VERSION");?></div>
         <div id="darkbannerwrap"></div>
         
         <form method="post" class="layui-form" >
