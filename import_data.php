@@ -151,22 +151,31 @@ switch($_GET['act']){
       $ip_disease[] = $objPHPExcel->getActiveSheet()->getCell('H'.$row)->getValue();
       $ip_pnumb[] = $objPHPExcel->getActiveSheet()->getCell('I'.$row)->getValue();
     }
-    //门诊数据循环添加
-    $s = 0;
+    //数据循环添加
     for ($i = 0; $i <= $rowCount-2; $i++){
-      $sql = "INSERT INTO inpatient_log VALUES (NULL,'".$ip_numb[$i]."','".$ip_in_date[$i]."','".$ip_name[$i]."','".$ip_cid[$i]."','".$ip_sex[$i]."','".$ip_age[$i]."','".$ip_doctor[$i]."','".$ip_disease[$i]."','".$ip_pnumb[$i]."')";
-      $rs = $sdb->exec($sql); 
-      $s = $rs+$s;
+      $i_n = $db->insert("inpatient_log", 
+        [
+          "ip_numb" => $ip_numb[$i],
+          "ip_in_date" => $ip_in_date[$i],
+          "ip_name" => $ip_name[$i],
+          "ip_cid" => $ip_cid[$i],
+          "ip_sex" => $ip_sex[$i],
+          "ip_age" => $ip_age[$i],
+          "ip_doctor" => $ip_doctor[$i],
+          "ip_disease" => $ip_disease[$i],
+          "ip_pnumb" => $ip_pnumb[$i] 
+        ]
+      );
     }
 
     //判断执行行数是否等于内容行数
-    if($s == $rowCount-1){
+    if($i_n !== ''){
       //删除复制的文件
       unlink ( $fileName );
       echo "<script>layui.use('layer', function(){
       var layer = layui.layer;
       
-      layer.msg('成功导入 ".$s." 条住院数据',
+      layer.msg('成功导入 ".($rowCount-2)." 条住院数据',
         {icon:1,time:2000},
           function() {
             //关闭当前frame
@@ -219,21 +228,28 @@ switch($_GET['act']){
       $cl_note[] = $objPHPExcel->getActiveSheet()->getCell('G'.$row)->getValue();
     }
     //数据循环添加
-    $s = 0;
     for ($i = 0; $i <= $rowCount-2; $i++){
-      $sql = "INSERT INTO customers_log VALUES (NULL,'".$cl_date[$i]."','".$cl_name[$i]."','".$cl_sex[$i]."','".$cl_age[$i]."','".$cl_pnumb[$i]."','".$cl_order[$i]."','".$cl_note[$i]."')";
-      $rs = $sdb->exec($sql); 
-      $s = $rs+$s;
+      $c_n = $db->insert("customers_log", 
+        [
+          "cl_date" => $cl_date[$i],
+          "cl_name" => $cl_name[$i],
+          "cl_sex" => $cl_sex[$i],
+          "cl_age" => $cl_age[$i],
+          "cl_pnumb" => $cl_pnumb[$i],
+          "cl_order" => $cl_order[$i],
+          "cl_note" => $cl_note[$i] 
+        ]
+      );
     }
 
     //判断执行行数是否等于内容行数
-    if($s == $rowCount-1){
+    if($c_n !== ''){
       //删除复制的文件
       unlink ( $fileName );
       echo "<script>layui.use('layer', function(){
       var layer = layui.layer;
       
-      layer.msg('成功导入 ".$s." 条筛查数据！',
+      layer.msg('成功导入 ".($rowCount-2)." 条筛查数据！',
         {icon:1,time:2000},
           function() {
             //关闭当前frame
