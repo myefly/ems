@@ -82,7 +82,7 @@ var is_remember = false;
                                 <cite>社筛日报</cite></a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('社筛活动安排','sshd_index.php')">
+                            <a onclick="xadmin.add_tab('社筛活动安排','activity_index.php')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>社筛活动安排</cite></a>
                         </li>

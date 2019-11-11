@@ -15,7 +15,8 @@
         <script type="text/javascript" src="./js/xadmin.js"></script>
         <!-- jQuery -->
         <script type="text/javascript" charset="utf8" src="./js/jquery.min.js"></script>
-
+        <link rel="stylesheet" href="./css/jqueryui.css">
+        <script type="text/javascript" src="./js/jqueryui.js"></script>
 
 
         <script type="text/javascript">
