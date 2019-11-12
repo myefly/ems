@@ -100,7 +100,7 @@ var is_remember = false;
                         <i class="iconfont nav_right">&#xe697;</i></a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('门诊到院','mzdy_index.php')">
+                            <a onclick="xadmin.add_tab('门诊到院','mz_index.php')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>门诊到院确认</cite></a>
                         </li>
@@ -118,7 +118,7 @@ var is_remember = false;
                         <i class="iconfont nav_right">&#xe697;</i></a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('手术住院','sszy_index.php')">
+                            <a onclick="xadmin.add_tab('手术住院','zy_index.php')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>手术住院确认</cite></a>
                         </li>

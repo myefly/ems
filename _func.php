@@ -166,7 +166,45 @@ switch($_GET['act']){
 			exit();
 		}
 	break;
+
+	case 'mcst_add':
+		$m_id = $_GET['m_id'];
+		$c_id = $_GET['c_id'];
+		$rm = $db->get("outpatient_log", "*", ["ol_id" => $m_id]);
+			$oc_date = $rm["ol_date"];
+			$oc_name = $rm["ol_name"];
+			$oc_sex = $rm["ol_sex"];
+			$oc_age = $rm["ol_age"];
+			$oc_address = $rm["ol_address"];
+			$oc_diagnosis = $rm["ol_diagnosis"];
+			$oc_dtype = $rm["ol_dtype"];
+			$oc_doctor = $rm["ol_doctor"];
+			$oc_pnumb = $rm["ol_pnumb"];
+$add1_sql2 = "INSERT INTO outpatient_cst VALUES (NULL,'".$oc_date."','".$oc_name."','".$oc_sex."','".$oc_age."','".$oc_address."','".$oc_diagnosis."','".$oc_dtype."','".$oc_doctor."','".$oc_pnumb."')";
+		$mcst_id = $db->insert("outpatient_cst", [
+		    "oc_date" => $oc_date,
+		    "oc_name" => $oc_name,
+		    "oc_sex" => $oc_sex,
+		    "oc_age" => $oc_age,
+		    "oc_address" => $oc_address,
+		    "oc_diagnosis" => $oc_diagnosis,
+		    "oc_dtype" => $oc_dtype,
+		    "oc_doctor" => $oc_doctor,
+		    "oc_pnumb" => $oc_pnumb,
+		    "oc_cid" => $c_id
+		]);
+
+		if($mcst_id !== ''){
+			echo "1";
+			exit();
+		}else{
+			echo "0";
+			exit();
+		}
+	break;
 	
+
+
 }
 
 ?>
