@@ -169,6 +169,7 @@ switch($_GET['act']){
 
 	case 'mcst_add':
 		$m_id = $_GET['m_id'];
+		$c_id = $_GET['c_id'];
 		$rm = $db->get("outpatient_log", "*", ["ol_id" => $m_id]);
 			$oc_date = $rm["ol_date"];
 			$oc_name = $rm["ol_name"];
@@ -189,7 +190,8 @@ $add1_sql2 = "INSERT INTO outpatient_cst VALUES (NULL,'".$oc_date."','".$oc_name
 		    "oc_diagnosis" => $oc_diagnosis,
 		    "oc_dtype" => $oc_dtype,
 		    "oc_doctor" => $oc_doctor,
-		    "oc_pnumb" => $oc_pnumb
+		    "oc_pnumb" => $oc_pnumb,
+		    "oc_cid" => $c_id
 		]);
 
 		if($mcst_id !== ''){

@@ -71,7 +71,7 @@ if(@$_GET["start_date"] == '' and @$_GET["end_date"] == ''){
 											$rb = $db->count("outpatient_cst", "*",["AND" => ["oc_name" => $ra['ol_name'],"oc_date" =>$ra['ol_date']]]);
 											$rc = $db->get("outpatient_cst","*",["AND" => ["oc_name" => $ra['ol_name'],"oc_date" =>$ra['ol_date']]]);
 											if ($rb == '0' ){
-												echo "<td><a title='点击添加' onclick=\"mcst_add(this,'".$ra['ol_id']."')\" href='javascript:;'><span class='layui-btn layui-btn-danger layui-btn-mini'>未添加</span></a></td>";
+												echo "<td><a title='点击添加' onclick=\"mcst_add(this,'".$ra['ol_id']."','".$ra['cl_id']."')\" href='javascript:;'><span class='layui-btn layui-btn-danger layui-btn-mini'>未添加</span></a></td>";
 												
 											}else{
 												echo "<td><a title='点击删除' onclick=\"_del(this,'outpatient_cst','oc_id','".$rc['oc_id']."')\" href='javascript:;'><span class='layui-btn layui-btn-normal layui-btn-mini'>已添加</span></a></td>";
@@ -118,10 +118,10 @@ if(@$_GET["start_date"] == '' and @$_GET["end_date"] == ''){
 });
 
 		/*添加*/
-		function mcst_add(obj,id){
+		function mcst_add(obj,id,id2){
 			$.ajax({
 				type: "get",
-				url: "_func.php?act=mcst_add&m_id=" + id,
+				url: "_func.php?act=mcst_add&m_id="+id+"&c_id="+id2,
 				success:function (data) {
 					if (data == '1'){
 						layer.msg('已加入每日到院清单!',{

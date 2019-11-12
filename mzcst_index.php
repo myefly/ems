@@ -27,6 +27,10 @@ if(@$_GET["s_date"] == '' or @$_GET["e_date"] == ''){
 				<div class="layui-col-md12">
 					<div class="layui-card">
 						<div class="layui-card-body ">
+							<div>
+								<a class="layui-btn layui-btn-normal layui-btn-mini" style="float:right" onclick="xadmin.open('导出花名册','mzcst_roster.php?sd=<?php echo $ss_date; ?>&ed=<?php echo $ee_date; ?>',1,1);location.reload();" title="导出本页花名册">导出门诊业绩清单	
+								</a>
+							</div>
 							<form class="layui-form layui-col-space5" action="mzcst_index.php" method="get">
 								<div class="layui-inline layui-show-xs-block">
 									<input type="text" name="s_date" id="s_date" class="layui-input"  autocomplete="off" value="<?php echo $ss_date;?>">
@@ -38,7 +42,9 @@ if(@$_GET["s_date"] == '' or @$_GET["e_date"] == ''){
 									<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
 								</div>
 							</form>
+							
 						</div>
+
 						<div class="layui-card-body layui-table-body layui-table-main">
 							<table class="layui-table layui-form" style="text-align: center;">
 								<thead> 
