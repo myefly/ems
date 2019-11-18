@@ -68,7 +68,6 @@ if(@$_GET["mzdy_date"] == ''){
                                         }
                                     }
                                     
-                                    $sdb->close();
                                     ?>
                                 </tbody>
                             </table>
