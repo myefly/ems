@@ -202,7 +202,86 @@ $add1_sql2 = "INSERT INTO outpatient_cst VALUES (NULL,'".$oc_date."','".$oc_name
 			exit();
 		}
 	break;
+
+	case 'csinfo':
+	$c_id = $_GET['cc_id'];
+	$ra = $db->get("inpatient_cst","*",["ic_id" => $c_id]);
+	$ci_name = $ra["ic_name"];
+	$ci_date = $ra["ic_date"];
+	if ($ci_name  ==  "" or $ci_date == ""){
+		echo "0";
+		exit();
+		break;
+	}
+	$cs_id = $db->insert("charitable_info", [
+		    "ci_date" => $ci_date,
+		    "ci_name" => $ci_name,
+		    "ci_sfz" => "0",
+		    "ci_blb" => "0",
+		    "ci_cszl" => "0"
+		]);			
+	if($cs_id !== ''){
+		echo "1";
+		exit();
+	}else{
+		echo "0";
+		exit();
+		}
+	break;
 	
+	case 'cswi':
+		$ci_v = $_GET["ci_v"];
+		$ci_id = $_GET["ci_id"];
+		$ci_t = "ci_".$_GET["ci_t"];
+
+		$swid = $db->update("charitable_info", [
+		    $ci_t => $ci_v
+		], [
+			"ci_id" => $ci_id
+		]);
+		
+		if($swid == '1'){
+			echo '1';
+			exit();
+		}else{
+			echo '1';
+			exit();
+		}
+	break;
+
+	case 'cs_add':
+	$c_id = $_GET['cc_id'];
+	$rdm = $db->get("inpatient_cst","*",["ic_id" => $c_id]);
+	//$add1_sql = "select * from inpatient_cst where ic_id = ".$c_id;
+	//$rdm = $sdb->querySingle($add1_sql,true);
+	$cc_name = $rdm["ic_name"];
+	$cc_sex = $rdm["ic_sex"];
+	$cc_age = $rdm["ic_age"];
+	$cc_in_date = $rdm["ic_date"];
+	$cc_pnumb = $rdm["ic_pnumb"];
+	$cc_address = $rdm["ic_address"];
+	$cc_disease = $rdm["ic_disease"];
+	$cc_opeye = $rdm["ic_opeye"];
+
+	$csadd_id = $db->insert("charitable_cst", [
+		    "ci_date" => $ci_date,
+		    "ci_name" => $ci_name,
+		    "ci_sfz" => "0",
+		    "ci_blb" => "0",
+		    "ci_cszl" => "0"
+		]);
+	$add1_sql2 = "INSERT INTO charitable_cst VALUES (NULL,'".$cc_name."','".$cc_sex."','".$cc_age."','','".$cc_pnumb."','".$cc_address."','".$cc_in_date."','','','".$cc_disease."','".$cc_opeye."','','','','','','')";
+	$rsm = $sdb->exec($add1_sql2);				
+	if($rsm == '1'){
+		echo '1';
+		$sdb->close();
+		exit();
+	}else{
+		echo '1';
+		$sdb->close();
+		exit();
+	}
+	break;
 
 
 }

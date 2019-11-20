@@ -1,7 +1,7 @@
 <?php
-include_once("conn/chk.php");
-include_once("conn/config.php");
-require_once("_meta.php");
+require_once ("lib/chk.php"); 
+require_once ("_conn.php"); 
+require_once ("_meta.php");
 if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 	$css_date = date("Ymd");
 	$cee_date = date("Ymd");
@@ -66,38 +66,47 @@ if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 							</thead>
 							<tbody>
 								<?php
-								$sdb = new SQLite3($mysqlite);
-								$sql = "SELECT * from inpatient_cst where ic_date >= " . $css_date . " and ic_date <= " . $cee_date . " and ic_charitable = '是' ORDER BY ic_date";
-								$rd = $sdb->query($sql);
-								if ($rd == "") {
+								$ras = $db->select("inpatient_cst", "*", [
+									"AND" => [
+											"ic_date[<>]" => [$css_date, $cee_date],
+											"ic_charitable" => "是"
+									]
+								]);
+
+								if ($ras == "") {
 									echo "无数据";
 								} else {
-									while ($rr = $rd->fetchArray(SQLITE3_ASSOC)) {
+									foreach($ras as $ra) {
 										echo "<tr class='text-c'>";
-										echo "<td>" . $rr['ic_date'] . "</td>";
-										echo "<td>" . $rr['ic_name'] . "</td>";
-										echo "<td>" . $rr['ic_sex'] . "</td>";
-										echo "<td>" . $rr['ic_pnumb'] . "</td>";
-										echo "<td>" . $rr['ic_disease'] . "</td>";
-										echo "<td>" . $rr['ic_opeye'] . "</td>";
-										$sql2 = "select count(*),cc_id,cc_idcard,cc_ybjs_date from charitable_cst where cc_name = '" . $rr['ic_name'] . "' and cc_in_date = '" . $rr['ic_date'] . "'";
-										$rs = $sdb->querySingle($sql2, true);
-										if ($rs['count(*)'] == '1') {
-											if ($rs['cc_ybjs_date'] !== '') {
-												echo "<td><a title='' onclick=\"xadmin.open('查看','cscst_edit.php?cc_id=" . $rs['cc_id'] . "')\" href='javascript:;'><span class='layui-btn l layui-btn-mini'>资料完整</span></a></td>";
-											} else {
-												echo "<td><a title='补充修改慈善资料' onclick=\"xadmin.open('补充修改慈善资料','cscst_edit.php?cc_id=" . $rs['cc_id'] . "')\" href='javascript:;'><span class='layui-btn layui-btn-normal layui-btn-mini'>需补充</span></a></td>";
-											}
-										} else {
+										echo "<td>" . $ra['ic_date'] . "</td>";
+										echo "<td>" . $ra['ic_name'] . "</td>";
+										echo "<td>" . $ra['ic_sex'] . "</td>";
+										echo "<td>" . $ra['ic_pnumb'] . "</td>";
+										echo "<td>" . $ra['ic_disease'] . "</td>";
+										echo "<td>" . $ra['ic_opeye'] . "</td>";
 
-											echo "<td><a title='点击添加' onclick=\"c_add(this,'" . $rr['ic_id'] . "')\" href='javascript:;'><span class='layui-btn layui-btn-danger layui-btn-mini'>未添加</span></a></td>";
+										$rb = $db->count("charitable_cst", "*",["AND" => ["cc_name" => $ra['ic_name'],"cc_in_date" =>$ra['ic_date']]]);
+
+										$rc = $db->get("charitable_cst","*",["AND" => ["cc_name" => $ra['ic_name'],"cc_in_date" =>$ra['ic_date']]]);
+										//$sql2 = "select count(*),cc_id,cc_idcard,cc_ybjs_date from charitable_cst where cc_name = '" . $rr['ic_name'] . "' and cc_in_date = '" . $rr['ic_date'] . "'";
+
+
+										//$rs = $sdb->querySingle($sql2, true);
+										if ($rb == '0') {
+											echo "<td><a title='点击添加' onclick=\"cs_add(this,'" . $ra['ic_id'] . "')\" href='javascript:;'><span class='layui-btn layui-btn-danger layui-btn-mini'>未添加</span></a></td>";
+										} else {
+											if ($rc['cc_ybjs_date'] !== '') {
+												echo "<td><a title='' onclick=\"xadmin.open('查看','cscst_edit.php?cc_id=" . $rc['cc_id'] . "')\" href='javascript:;'><span class='layui-btn l layui-btn-mini'>资料完整</span></a></td>";
+											} else {
+												echo "<td><a title='补充修改慈善资料' onclick=\"xadmin.open('补充修改慈善资料','cscst_edit.php?cc_id=" . $rc['cc_id'] . "')\" href='javascript:;'><span class='layui-btn layui-btn-normal layui-btn-mini'>需补充</span></a></td>";
+											}
+											
 										}
 
 										echo "</tr>";
 									}
 								}
 
-								$sdb->close();
 								?>
 							</tbody>
 						</table>
@@ -137,10 +146,10 @@ if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 	});
 
 	/*添加*/
-	function c_add(obj, id) {
+	function cs_add(obj, id) {
 		$.ajax({
 			type: "get",
-			url: "cs_check.php?act=add1&cc_id=" + id,
+			url: "_func.php?act=cs_add&cc_id=" + id,
 			success: function(data) {
 				if (data == '1') {
 					layer.msg('已加入到慈善清单!', {
