@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__) . '\Classes\PHPExcel.php';
+require_once dirname(__FILE__) . '/Classes/PHPExcel.php';
 //require_once './Classes/PHPExcel.php';
 $objPHPExcel = new PHPExcel(); //新建phpexcel实例
 $objSheet = $objPHPExcel->getActiveSheet(); //获取到sheet

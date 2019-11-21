@@ -355,8 +355,6 @@ $add1_sql2 = "INSERT INTO outpatient_cst VALUES (NULL,'".$oc_date."','".$oc_name
 	case 'zy_add':
 		$s_id = $_GET['ss_id'];
 		$rdm = $db->get("inpatient_log", "*",["ip_id"=>$s_id]);
-		//$add1_sql = "select * from inpatient_log where ip_id = ".$s_id;
-		//$rdm = $sdb->querySingle($add1_sql,true);
 			$ic_date = $rdm["ip_in_date"];
 			$ic_name = $rdm["ip_name"];
 			$ic_sex = $rdm["ip_sex"];
@@ -419,10 +417,7 @@ $add1_sql2 = "INSERT INTO outpatient_cst VALUES (NULL,'".$oc_date."','".$oc_name
 		    "ic_charitable" => $sszy_charitable,
 		    "ic_opcost" => $sszy_opcost,
 		    "ic_note" => $sszy_note
-		]);
-		
-		//$p_sql = "INSERT INTO inpatient_cst VALUES (NULL,'".$sszy_date."','".$sszy_name."','".$sszy_sex."','".$sszy_age."','".$sszy_pnumb."','".$sszy_address."','".$sszy_od."','".$sszy_os."','".$sszy_reod."','".$sszy_reos."','".$sszy_disease."','".$sszy_opeye."','".$sszy_twoeye."','".$sszy_tedate."','".$sszy_charitable."','".$sszy_opcost."','".$sszy_note."')";
-			//$ret1 = $sdb->exec($p_sql);			
+		]);			
 		
 		if($zycst_id !== ''){
 				echo "1";
@@ -433,7 +428,65 @@ $add1_sql2 = "INSERT INTO outpatient_cst VALUES (NULL,'".$oc_date."','".$oc_name
 			}
 		break;
 
+		case 'sop':
+			$sdate = $_GET['sdate'];
+			$sname = $_GET['sname'];
+			$edate = date('Ymd',strtotime('+5 day',strtotime($sdate)));
+			
+			$ra = $db->get("inpatient_exp","*",["AND" => ["ie_name" => $sname,"ie_date[<>]" => [$sdate, $edate]]]);
+			echo $ra['ie_per'];
+		break;
+
+		case 'zycst_edit':
+			$ic_id = $_POST["sszy_id"];
+			$ic_date = $_POST["sszy_date"];
+			$ic_name = $_POST["sszy_name"];
+			$ic_sex = $_POST["sszy_sex"];
+			$ic_age = $_POST["sszy_age"];
+			$ic_op_date = $_POST["sszy_op_date"];
+			$ic_pnumb = $_POST["sszy_pnumb"];
+			$ic_address = $_POST["sszy_address"];
+			$ic_od = $_POST["sszy_od"];
+			$ic_os = $_POST["sszy_os"];
+			$ic_idcard = $_POST["sszy_idcard"];
+			$ic_disease = $_POST["sszy_disease"];
+			$ic_opeye = $_POST["sszy_opeye"];
+			$ic_twoeye = $_POST["sszy_twoeye"];
+			$ic_tedate = $_POST["sszy_tedate"];
+			$ic_charitable = $_POST["sszy_charitable"];
+			$ic_opcost = $_POST["sszy_opcost"];
+			$ic_note = $_POST["sszy_note"];
+			
+			$zye_id = $db->update("inpatient_cst", [
+				"ic_date" => $ic_date,
+				"ic_name" => $ic_name,
+				"ic_sex" => $ic_sex,
+				"ic_age" => $ic_age,
+				"ic_op_date" => $ic_op_date,
+				"ic_pnumb" => $ic_pnumb,
+				"ic_address" => $ic_address,
+				"ic_od" => $ic_od,
+				"ic_os" => $ic_os,
+				"ic_idcard" => $ic_idcard,
+				"ic_disease" => $ic_disease,
+				"ic_opeye" => $ic_opeye,
+				"ic_twoeye" => $ic_twoeye,
+				"ic_tedate" => $ic_tedate,
+				"ic_charitable" => $ic_charitable,
+				"ic_opcost" => $ic_opcost,
+				"ic_note" => $ic_note
+			], [
+				"ic_id" => $ic_id
+			]);
+
+			if($zye_id !== ''){
+				echo "1";
+				exit();
+			}else{
+				echo "0";
+				exit();
+			}
+		break;
+
 
 }
-
-?>

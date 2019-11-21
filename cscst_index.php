@@ -1,7 +1,7 @@
 <?php
-require_once ("lib/chk.php"); 
-require_once ("_conn.php"); 
-require_once ("_meta.php");
+require_once("lib/chk.php");
+require_once("_conn.php");
+require_once("_meta.php");
 if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 	$css_date = date("Ymd");
 	$cee_date = date("Ymd");
@@ -9,7 +9,7 @@ if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 	$css_date = @$_GET["cs_date"];
 	$cee_date = @$_GET["ce_date"];
 }
-
+//echo dirname(__FILE__) . '\Classes\PHPExcel.php';
 ?>
 </head>
 
@@ -69,15 +69,15 @@ if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 								<?php
 								$ras = $db->select("inpatient_cst", "*", [
 									"AND" => [
-											"ic_date[<>]" => [$css_date, $cee_date],
-											"ic_charitable" => "是"
+										"ic_date[<>]" => [$css_date, $cee_date],
+										"ic_charitable" => "是"
 									]
 								]);
 
 								if ($ras == "") {
 									echo "无数据";
 								} else {
-									foreach($ras as $ra) {
+									foreach ($ras as $ra) {
 										echo "<tr class='text-c'>";
 										echo "<td>" . $ra['ic_date'] . "</td>";
 										echo "<td>" . $ra['ic_name'] . "</td>";
@@ -86,9 +86,9 @@ if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 										echo "<td>" . $ra['ic_disease'] . "</td>";
 										echo "<td>" . $ra['ic_opeye'] . "</td>";
 
-										$rb = $db->count("charitable_cst", "*",["AND" => ["cc_name" => $ra['ic_name'],"cc_in_date" =>$ra['ic_date']]]);
+										$rb = $db->count("charitable_cst", "*", ["AND" => ["cc_name" => $ra['ic_name'], "cc_in_date" => $ra['ic_date']]]);
 
-										$rc = $db->get("charitable_cst","*",["AND" => ["cc_name" => $ra['ic_name'],"cc_in_date" =>$ra['ic_date']]]);
+										$rc = $db->get("charitable_cst", "*", ["AND" => ["cc_name" => $ra['ic_name'], "cc_in_date" => $ra['ic_date']]]);
 										//$sql2 = "select count(*),cc_id,cc_idcard,cc_ybjs_date from charitable_cst where cc_name = '" . $rr['ic_name'] . "' and cc_in_date = '" . $rr['ic_date'] . "'";
 
 
@@ -101,7 +101,6 @@ if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 											} else {
 												echo "<td><a title='补充修改慈善资料' onclick=\"xadmin.open('补充修改慈善资料','cscst_edit.php?cc_id=" . $rc['cc_id'] . "')\" href='javascript:;'><span class='layui-btn layui-btn-normal layui-btn-mini'>需补充</span></a></td>";
 											}
-											
 										}
 
 										echo "</tr>";
