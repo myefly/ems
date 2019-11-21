@@ -123,7 +123,7 @@ var is_remember = false;
                                 <cite>手术住院确认</cite></a>
                         </li>
                         <li>
-                            <a onclick="xadmin.add_tab('手术住院清单','sscst_index.php')">
+                            <a onclick="xadmin.add_tab('手术住院清单','zycst_index.php')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>手术住院清单</cite></a>
                         </li>

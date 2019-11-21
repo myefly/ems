@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__) . '/../Classes/PHPExcel.php';
+require_once dirname(__FILE__) . '\Classes\PHPExcel.php';
 //require_once './Classes/PHPExcel.php';
 $objPHPExcel = new PHPExcel(); //新建phpexcel实例
 $objSheet = $objPHPExcel->getActiveSheet(); //获取到sheet
@@ -31,7 +31,7 @@ $objSheet->setCellValue("A2", "序号")
 $objPHPExcel->getActiveSheet()->getStyle('D')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
 $objPHPExcel->getActiveSheet()->getStyle('E')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
 
-$sdb = new SQLite3("conn/hz.ems");
+$sdb = new SQLite3("lib/ems.db");
 $sql = "SELECT * from charitable_cst where cc_in_date >=" . $_GET["sd"] . " and cc_in_date <=" . $_GET["ed"]." order by cc_in_date";
 $rd = $sdb->query($sql);
 $si = 1;

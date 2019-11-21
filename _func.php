@@ -283,6 +283,156 @@ $add1_sql2 = "INSERT INTO outpatient_cst VALUES (NULL,'".$oc_date."','".$oc_name
 	}
 	break;
 
+	case 'show_cst':
+		$sdate = $_GET['sdate'];
+		$cname = $_GET['sname'];
+		$edate = date('Ymd',strtotime('+5 day',strtotime($sdate)));
+		
+		$rm = $db->get("inpatient_exp", "*",["AND" => ["ie_name" => $cname,"ie_date[>=]" => $sdate,"ie_date[<=]"=>$edate]]);
+
+		if ($rm == ""){
+			echo "无数据，请选择正确的时间~~";
+		}else{
+			
+			echo $rm['ie_all']."-".$rm['ie_rei']."-".$rm['ie_per'];
+
+		}
+	break;
+
+	case 'cscst_edit':
+	$cc_id = $_POST["cc_id"];
+
+	$cc_name = $_POST["cc_name"];
+	$cc_sex = $_POST["cc_sex"];
+	$cc_age = $_POST["cc_age"];
+	$cc_idcard = $_POST["cc_idcard"];
+	$cc_pnumb = $_POST["cc_pnumb"];
+	$cc_address = $_POST["cc_address"];
+	$cc_disease = $_POST["cc_disease"];
+	$cc_opeye = $_POST["cc_opeye"];
+	$cc_in_date = $_POST["cc_in_date"];
+	$cc_op_date = $_POST["cc_op_date"];
+	$cc_ybjs_date = $_POST["cc_ybjs_date"];
+	$cc_all_money = $_POST["cc_all_money"];
+	$cc_yb_money = $_POST["cc_yb_money"];
+	$cc_zz_money = $_POST["cc_zz_money"];
+	$cc_bt_money = $_POST["cc_bt_money"];
+	$cc_own_money = $_POST["cc_own_money"];
+	$cc_note = $_POST["cc_note"];
+
+	$cst_id = $db->update("charitable_cst", [
+			"cc_name" => $cc_name,
+		    "cc_sex" => $cc_sex,
+		    "cc_age" => $cc_age,
+		    "cc_idcard" => $cc_idcard,
+		    "cc_pnumb" => $cc_pnumb,
+		    "cc_address" => $cc_address,
+		    "cc_disease" => $cc_disease,
+		    "cc_opeye" => $cc_opeye,
+		    "cc_in_date" => $cc_in_date,
+		    "cc_op_date" => $cc_op_date,
+		    "cc_ybjs_date" => $cc_ybjs_date,
+		    "cc_all_money" => $cc_all_money,
+		    "cc_yb_money" => $cc_yb_money,
+		    "cc_zz_money" => $cc_zz_money,
+		    "cc_bt_money" => $cc_bt_money,
+		    "cc_own_money" => $cc_own_money,
+		    "cc_note" => $cc_note
+		], [
+			"cc_id" => $cc_id
+		]);
+
+
+		if($cst_id !== ''){
+			echo "1";
+			exit();
+		}else{
+			echo "0";
+			exit();
+		}
+	break;
+
+	case 'zy_add':
+		$s_id = $_GET['ss_id'];
+		$rdm = $db->get("inpatient_log", "*",["ip_id"=>$s_id]);
+		//$add1_sql = "select * from inpatient_log where ip_id = ".$s_id;
+		//$rdm = $sdb->querySingle($add1_sql,true);
+			$ic_date = $rdm["ip_in_date"];
+			$ic_name = $rdm["ip_name"];
+			$ic_sex = $rdm["ip_sex"];
+			$ic_age = $rdm["ip_age"];
+			$ic_pnumb = $rdm["ip_pnumb"];
+			$ic_disease = $rdm["ip_disease"];
+
+		$zyadd_id = $db->insert("inpatient_cst", [
+		    "ic_date" => $ic_date,
+		    "ic_name" => $ic_name,
+		    "ic_sex" => $ic_sex,
+		    "ic_age" => $ic_age,
+		    "ic_pnumb" => $ic_pnumb,
+		    "ic_disease" => $ic_disease
+		]);
+
+			if($zyadd_id !== ''){
+				echo "1";
+				exit();
+			}else{
+				echo "0";
+				exit();
+			}
+	break;
+
+	case 'zycst_add':
+		$sszy_date = $_POST["sszy_date"];
+		$sszy_name = $_POST["sszy_name"];
+		$sszy_sex = $_POST["sszy_sex"];
+		$sszy_age = $_POST["sszy_age"];
+		$sszy_pnumb = $_POST["sszy_pnumb"];
+		$sszy_op_date = $_POST["sszy_op_date"];
+		$sszy_address = $_POST["sszy_address"];
+		$sszy_od = $_POST["sszy_od"];
+		$sszy_os = $_POST["sszy_os"];
+		$sszy_idcard = $_POST["sszy_idcard"];
+		$sszy_disease = $_POST["sszy_disease"];
+		$sszy_opeye = $_POST["sszy_opeye"];
+		$sszy_twoeye = $_POST["sszy_twoeye"];
+		$sszy_tedate = $_POST["sszy_tedate"];
+		$sszy_charitable = $_POST["sszy_charitable"];
+		$sszy_opcost = $_POST["sszy_opcost"];
+		$sszy_note = $_POST["sszy_note"];
+
+		$zycst_id = $db->insert("inpatient_cst", [
+		    "ic_date" => $sszy_date,
+		    "ic_name" => $sszy_name,
+		    "ic_sex" => $sszy_sex,
+		    "ic_age" => $sszy_age,
+		    "ic_op_date" => $sszy_op_date,
+		    "ic_pnumb" => $sszy_pnumb,
+		    "ic_address" => $sszy_address,
+		    "ic_od" => $sszy_od,
+		    "ic_os" => $sszy_os,
+		    "ic_idcard" => $sszy_idcard,
+		    "ic_disease" => $sszy_disease,
+		    "ic_opeye" => $sszy_opeye,
+		    "ic_twoeye" => $sszy_twoeye,
+		    "ic_tedate" => $sszy_tedate,
+		    "ic_charitable" => $sszy_charitable,
+		    "ic_opcost" => $sszy_opcost,
+		    "ic_note" => $sszy_note
+		]);
+		
+		//$p_sql = "INSERT INTO inpatient_cst VALUES (NULL,'".$sszy_date."','".$sszy_name."','".$sszy_sex."','".$sszy_age."','".$sszy_pnumb."','".$sszy_address."','".$sszy_od."','".$sszy_os."','".$sszy_reod."','".$sszy_reos."','".$sszy_disease."','".$sszy_opeye."','".$sszy_twoeye."','".$sszy_tedate."','".$sszy_charitable."','".$sszy_opcost."','".$sszy_note."')";
+			//$ret1 = $sdb->exec($p_sql);			
+		
+		if($zycst_id !== ''){
+				echo "1";
+				exit();
+			}else{
+				echo "0";
+				exit();
+			}
+		break;
+
 
 }
 

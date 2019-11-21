@@ -64,8 +64,8 @@ if(@$_GET["szy_date"] == '' and @$_GET["ezy_date"] == ''){
                                             echo "<td>".$ra['ip_in_date']."</td>";
                                             echo "<td>".$ra['ip_name']."</td>";
                                             echo "<td>".$ra['ip_sex']."</td>";
-                                            echo "<td>".$ra['ip_age']."</td>";
-                                            echo "<td>".$ra['cl_age']."</td>";
+                                            echo "<td title='".$ra['ip_pnumb']."'>".$ra['ip_age']."</td>";
+                                            echo "<td title='".$ra['cl_pnumb']."'>".$ra['cl_age']."</td>";
                                             echo "<td>".$ra['cl_sex']."</td>";
                                             echo "<td>".$ra['cl_date']."</td>";
                                         $rb = $db->count("inpatient_cst", "*",["AND" => ["ic_name" => $ra['ip_name'],"ic_date" =>$ra['ip_in_date']]]);
@@ -122,7 +122,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 		function s_add(obj,id){
 			$.ajax({
 				type: "get",
-				url: "ss_check.php?act=add1&ss_id=" + id,
+				url: "_func.php?act=zy_add&ss_id=" + id,
 				success:function (data) {
 					if (data == '1'){
 									layer.msg('已加入每日住院清单!',{

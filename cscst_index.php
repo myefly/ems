@@ -9,6 +9,7 @@ if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 	$css_date = @$_GET["cs_date"];
 	$cee_date = @$_GET["ce_date"];
 }
+
 ?>
 </head>
 
