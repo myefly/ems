@@ -20,7 +20,8 @@ if (@$_GET["is_date"] == '' or @$_GET["ie_date"] == '') {
 			<a><cite>慈善光明行资料</cite></a>
 
 		</span>
-		<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+		<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+			onclick="location.reload()" title="刷新">
 			<i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 	</div>
 	<div class="layui-fluid">
@@ -35,13 +36,16 @@ if (@$_GET["is_date"] == '' or @$_GET["ie_date"] == '') {
 						</div>-->
 						<form class="layui-form layui-col-space5" action="csinfo_index.php" method="get">
 							<div class="layui-inline layui-show-xs-block">
-								<input type="text" name="is_date" id="is_date" class="layui-input" value="<?php echo $iss_date; ?>">
+								<input type="text" name="is_date" id="is_date" class="layui-input"
+									value="<?php echo $iss_date; ?>">
 							</div>
 							<div class="layui-inline layui-show-xs-block">
-								<input type="text" name="ie_date" id="ie_date" class="layui-input" value="<?php echo $iee_date; ?>">
+								<input type="text" name="ie_date" id="ie_date" class="layui-input"
+									value="<?php echo $iee_date; ?>">
 							</div>
 							<div class="layui-inline layui-show-xs-block">
-								<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+								<button class="layui-btn" lay-submit="" lay-filter="sreach"><i
+										class="layui-icon">&#xe615;</i></button>
 							</div>
 						</form>
 
@@ -142,11 +146,11 @@ if (@$_GET["is_date"] == '' or @$_GET["ie_date"] == '') {
 
 
 <script type="text/javascript">
-	layui.use(['form', 'jquery', 'layer','laydate'], function() {
+	layui.use(['form', 'jquery', 'layer', 'laydate'], function () {
 		var form = layui.form,
-				layer = layui.layer,
-				jquery = layui.jquery,
-				laydate = layui.laydate;
+			layer = layui.layer,
+			jquery = layui.jquery,
+			laydate = layui.laydate;
 
 		//日期
 		laydate.render({
@@ -161,7 +165,7 @@ if (@$_GET["is_date"] == '' or @$_GET["ie_date"] == '') {
 			format: 'yyyyMMdd'
 		});
 
-		
+
 
 	});
 
@@ -171,11 +175,11 @@ if (@$_GET["is_date"] == '' or @$_GET["ie_date"] == '') {
 		$.ajax({
 			type: "get",
 			url: "_func.php?act=csinfo&cc_id=" + id,
-			success: function(data) {
+			success: function (data) {
 				if (data == '1') {
 					layer.msg('已加入到慈善资料!', {
 						time: 2000,
-						end: function() {
+						end: function () {
 							location.reload();
 						}
 					});
@@ -191,15 +195,15 @@ if (@$_GET["is_date"] == '' or @$_GET["ie_date"] == '') {
 	}
 
 
-function c_swi(obj,id1,id2,id3) {
+	function c_swi(obj, id1, id2, id3) {
 		$.ajax({
 			type: "get",
-			url: "_func.php?act=cswi&ci_t="+id1+"&ci_v="+id2+"&ci_id="+id3,
-			success: function(data) {
+			url: "_func.php?act=cswi&ci_t=" + id1 + "&ci_v=" + id2 + "&ci_id=" + id3,
+			success: function (data) {
 				if (data == '1') {
 					layer.msg('资料已准备!', {
 						time: 1000,
-						end: function() {
+						end: function () {
 							location.reload();
 						}
 					})
@@ -212,7 +216,7 @@ function c_swi(obj,id1,id2,id3) {
 			}
 		});
 		return false;
-}
+	}
 </script>
 
 <!--请在上方写此页面业务相关的脚本-->
