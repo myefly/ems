@@ -34,7 +34,8 @@ if (@$_GET["cs_date"] == '' or @$_GET["ce_date"] == '') {
 				<div class="layui-card">
 					<div class="layui-card-body ">
 						<div>
-							<a class="layui-btn layui-btn-normal layui-btn-mini" style="float:right" onclick="xadmin.open('导出花名册','cscst_roster.php?sd=<?php echo $css_date; ?>&ed=<?php echo $cee_date; ?>',1,1);" title="导出本页花名册">
+							<a class="layui-btn layui-btn-normal layui-btn-mini" style="float:right" title="导出本页花名册" target="	
+_blank" href="cscst_roster.php?sd=<?php echo $css_date; ?>&ed=<?php echo $cee_date; ?>" >
 								导出花名册
 							</a>
 						</div>
