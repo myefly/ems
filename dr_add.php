@@ -198,7 +198,7 @@ if ($_GET['act'] == 'edit') {
     form.on('submit(add)',
       function(data) {
         $.ajax({
-          url: "dr_check.php?act=add",
+          url: "_func.php?act=dr_add",
           async: false,
           type: "POST",
           data: data.field,

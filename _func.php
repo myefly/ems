@@ -488,5 +488,64 @@ $add1_sql2 = "INSERT INTO outpatient_cst VALUES (NULL,'".$oc_date."','".$oc_name
 			}
 		break;
 
+		case 'dr_add':
+			$dr_date = $_POST['dr_date'];
+			$dr_scdd = $_POST['dr_scdd'];
+			$dr_scrs = $_POST['dr_scrs'];
+			$dr_yyrs = $_POST['dr_yyrs'];
+			$dr_dyrs = $_POST['dr_dyrs'];
+	
+			$yy_jg = $_POST['yy_jg'];
+			$yy_bnz = $_POST['yy_bnz'];
+			$yy_nr = $_POST['yy_nr'];
+			$yy_yd = $_POST['yy_yd'];
+			$yy_ld = $_POST['yy_ld'];
+			$yy_other = $_POST['yy_other'];
+	
+	
+			$ss_jg = $_POST['ss_jg'];
+			$ss_bnz = $_POST['ss_bnz'];
+			$ss_nr = $_POST['ss_nr'];
+			$ss_yd = $_POST['ss_yd'];
+			$ss_ld = $_POST['ss_ld'];
+			$ss_other = $_POST['ss_other'];
+	
+			$dr_pj = $_POST['dr_pj'];
+			$dr_ry = $_POST['dr_ry'];
+			$dr_note = $_POST['dr_note'];
+
+			$dradd_id = $db->insert("daily_report", [
+				"dr_date" => $dr_date,
+				"dr_scdd" => $dr_scdd,
+				"dr_scrs" => $dr_scrs,
+				"dr_yyrs" => $dr_yyrs,
+				"dr_dyrs" => $dr_dyrs,
+				"yy_jg" => $yy_jg,
+				"yy_bnz" => $yy_bnz,
+				"yy_nr" => $yy_nr,
+				"yy_yd" => $yy_yd,
+				"yy_ld" => $yy_ld,
+				"yy_other" => $yy_other,
+				"ss_jg" => $ss_jg,
+				"ss_bnz" => $ss_bnz,
+				"ss_nr" => $ss_nr,
+				"ss_yd" => $ss_yd,
+				"ss_ld" => $ss_ld,
+				"ss_other" => $ss_other,
+				"dr_pj" => $dr_pj,
+				"dr_ry" => $dr_ry,
+				"dr_note" => $dr_note
+			]);	
+	
+			if($dradd_id !== ''){
+				echo "1";
+				exit();
+			}else{
+				echo "0";
+				exit();
+			}
+		break;
+		break;
+
 
 }
