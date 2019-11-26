@@ -1,20 +1,20 @@
 <?php
-require_once ("lib/chk.php"); 
-require_once ("_conn.php"); 
-require_once ("_meta.php");
+require_once("lib/chk.php");
+require_once("_conn.php");
+require_once("_meta.php");
 ?>
 <script>
-// 是否开启刷新记忆tab功能
-var is_remember = false;
+    // 是否开启刷新记忆tab功能
+    var is_remember = false;
 </script>
-<title><?php echo constant("EMS_NAME");?> - EMS <?php echo constant("EMS_VERSION");?></title>
+<title><?php echo constant("EMS_NAME"); ?> - EMS <?php echo constant("EMS_VERSION"); ?></title>
 </head>
 
 <body class="index">
     <!-- 顶部开始 -->
     <div class="container">
         <div class="logo">
-            <a href="./main.php"><?php echo constant("EMS_NAME");?>EMS</a></div>
+            <a href="./main.php"><?php echo constant("EMS_NAME"); ?>EMS</a></div>
         <div class="left_open">
             <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
         </div>
@@ -158,11 +158,11 @@ var is_remember = false;
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>患者预约列表</cite></a>
                         </li>
-                        <li>
+                        <!--<li>
                             <a onclick="xadmin.add_tab('客户列表','excel.php')">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>患者跟踪拜访列表</cite></a>
-                        </li>
+                        </li>-->
 
                     </ul>
                 </li>
@@ -181,7 +181,7 @@ var is_remember = false;
 
                     </ul>
                 </li>
-                <li>
+                <!--<li>
                     <a href="javascript:;">
                         <i class="iconfont left-nav-li" lay-tips="其它功能">&#xe6b4;</i>
                         <cite>其它功能</cite>
@@ -193,7 +193,7 @@ var is_remember = false;
                                 <cite>区域管理</cite></a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
 
             </ul>
         </div>
@@ -229,19 +229,20 @@ var is_remember = false;
 
 </body>
 <script type="text/javascript">
-	function login_out() {
-		$.ajax({
-			url: "_func.php?act=login_out",
-			success: function(data) {
-					layer.msg('已退出!', {
-						time: 2000,
-						end: function() {
-							location.href='login.php';
-						}
-					})
-			}
-		});
-		return false;
-	}
+    function login_out() {
+        $.ajax({
+            url: "_func.php?act=login_out",
+            success: function(data) {
+                layer.msg('已退出!', {
+                    time: 2000,
+                    end: function() {
+                        location.href = 'login.php';
+                    }
+                })
+            }
+        });
+        return false;
+    }
 </script>
+
 </html>

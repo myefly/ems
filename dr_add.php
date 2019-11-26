@@ -233,7 +233,7 @@ if ($_GET['act'] == 'edit') {
     form.on('submit(edit)',
       function(data) {
         $.ajax({
-          url: "dr_check.php?act=edit",
+          url: "_func.php?act=dr_edit",
           async: false,
           type: "POST",
           data: data.field,
@@ -278,7 +278,7 @@ if ($_GET['act'] == 'edit') {
       <?php
       $rrs = $db->select("region_list", "*");
       foreach ($rrs as $rr) {
-        echo "'" . $rr['r_vc_name'] . " - " . $rr['r_township'] . " - " . $rr['r_county'] . "',";
+        echo "'" . $rr['rl_vc_name'] . " - " . $rr['rl_township'] . " - " . $rr['rl_county'] . "',";
       }
 
       ?>
