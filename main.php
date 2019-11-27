@@ -47,7 +47,7 @@ require_once("_meta.php");
                             <i class="iconfont">&#xe6b9;</i>添加患者预约信息</a>
                     </dd>
                     <dd>
-                        <a onclick="xadmin.open('添加入院信息','sscst_add.php?act=add',1080,600)">
+                        <a onclick="xadmin.open('添加入院信息','zycst_add.php?act=add',1080,600)">
                             <i class="iconfont">&#xe6b9;</i>快速添加入院信息</a>
                     </dd>
                 </dl>
