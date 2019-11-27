@@ -190,7 +190,6 @@ switch($_GET['act']){
       echo "住院数据导入错误".$s;
       unlink ( $fileName );
     }
-    $sdb->close();
   break;
 
   case 'sc':
@@ -264,7 +263,6 @@ switch($_GET['act']){
       echo "筛查数据导入错误".$s;
       unlink ( $fileName );
     }
-    $sdb->close();
   break;
 
 }
