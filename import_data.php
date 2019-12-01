@@ -226,23 +226,24 @@ switch($_GET['act']){
       $cl_order[] = $objPHPExcel->getActiveSheet()->getCell('F'.$row)->getValue();
       $cl_note[] = $objPHPExcel->getActiveSheet()->getCell('G'.$row)->getValue();
     }
+    print_r($cl_name[0]);
     //数据循环添加
-    for ($i = 0; $i <= $rowCount-2; $i++){
-      $c_n = $db->insert("customers_log", 
-        [
-          "cl_date" => $cl_date[$i],
-          "cl_name" => $cl_name[$i],
-          "cl_sex" => $cl_sex[$i],
-          "cl_age" => $cl_age[$i],
-          "cl_pnumb" => $cl_pnumb[$i],
-          "cl_order" => $cl_order[$i],
-          "cl_note" => $cl_note[$i] 
-        ]
-      );
-    }
+    //for ($i = 0; $i <= $rowCount-2; $i++){
+    //  $c_n = $db->insert("customers_log", 
+    //    [
+    //      "cl_date" => $cl_date[$i],
+     //     "cl_name" => $cl_name[$i],
+     //     "cl_sex" => $cl_sex[$i],
+    //      "cl_age" => $cl_age[$i],
+     //     "cl_pnumb" => $cl_pnumb[$i],
+    //      "cl_order" => $cl_order[$i],
+    //      "cl_note" => $cl_note[$i] 
+    //    ]
+    //  );
+    //}
 
     //判断执行行数是否等于内容行数
-    if($c_n !== ''){
+    /*if($c_n !== ''){
       //删除复制的文件
       unlink ( $fileName );
       echo "<script>layui.use('layer', function(){
@@ -262,7 +263,7 @@ switch($_GET['act']){
     }else{
       echo "筛查数据导入错误".$s;
       unlink ( $fileName );
-    }
+    }*/
   break;
 
 }
