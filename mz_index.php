@@ -43,10 +43,13 @@ if(@$_GET["start_date"] == '' and @$_GET["end_date"] == ''){
 							<table class="layui-table layui-form">
 								<thead> 
 									<tr>
-										<th>门诊日期</th>
+										<th>门诊<br>日期</th>
+										<th>门诊地址</th>
 										<th>门诊姓名</th>
 										<th>门诊性别</th>
 										<th>门诊年龄</th>
+										<th>门诊电话</th>
+										<th>报备电话</th>
 										<th>报备年龄</th>
 										<th>报备性别</th>
 										<th>报备日期</th>
@@ -62,9 +65,12 @@ if(@$_GET["start_date"] == '' and @$_GET["end_date"] == ''){
 										foreach($ras as $ra){
 											echo "<tr class='text-c'>";
 											echo "<td>".$ra['ol_date']."</td>";
+											echo "<td>".$ra['ol_address']."</td>";
 											echo "<td title='".$ra['ol_address']."'>".$ra['ol_name']."</td>";
 											echo "<td>".$ra['ol_sex']."</td>";
 											echo "<td title='".$ra['ol_pnumb']."'>".$ra['ol_age']."</td>";
+											echo "<td>".$ra['ol_pnumb']."</td>";
+											echo "<td>".$ra['cl_pnumb']."</td>";
 											echo "<td title='".$ra['cl_pnumb']."'>".$ra['cl_age']."</td>";
 											echo "<td>".$ra['cl_sex']."</td>";
 											echo "<td>".$ra['cl_date']."</td>";
